@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "origin-hephaestus",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-28",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"],
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "hephaestus",
+      "database_id": "8f102c2a-0426-4628-b829-ca90ba82bfa9",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "workflows": [
+    { "name": "hephaestus-coding", "binding": "CODING", "class_name": "CodingWorkflow" },
+  ],
+  "triggers": { "crons": ["*/5 * * * *"] },
+  "vars": {
+    "APP_MODE": "live",
+    "MODEL_NAME": "gpt-4.1",
+    "MAX_REVISIONS": "3",
+    "JOB_TIMEOUT_SECONDS": "600",
+  },
+  "observability": { "enabled": true, "traces": { "enabled": true } },
+}

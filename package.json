@@ -1,0 +1,47 @@
+{
+  "name": "origin-hephaestus",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "dev:api": "wrangler dev --port 8787",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "db:local": "wrangler d1 migrations apply hephaestus --local",
+    "db:remote": "wrangler d1 migrations apply hephaestus --remote",
+    "deploy": "npm run build && wrangler deploy",
+    "types": "wrangler types",
+    "lint": "eslint src worker tests",
+    "format": "prettier --write .",
+    "smoke": "node scripts/public-smoke.mjs",
+    "admin:configure": "node scripts/configure-admin.mjs"
+  },
+  "dependencies": {
+    "hono": "4.13.14",
+    "jose": "^6.1.0",
+    "lucide-react": "^0.468.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.9",
+    "@eslint/js": "^9.39.5",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "latest",
+    "eslint": "^9.39.5",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "prettier": "^3.9.10",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.72.1",
+    "vite": "8.3.5",
+    "vitest": "^5.0.5",
+    "wrangler": "4.154.0"
+  }
+}
